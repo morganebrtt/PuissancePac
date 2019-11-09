@@ -1,7 +1,7 @@
 #puissance4{
     width: auto;
     height: auto;
-    background: url("../img/case.gif");
+    background: url("../img/backcell.png");
     margin: auto;
 }
 html {
@@ -22,5 +22,4 @@ html {
     width: 50px;
     height: 50px;
     border: 0;
-    margin: -1px;
 }
