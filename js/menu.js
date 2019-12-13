@@ -1,29 +1,27 @@
 $(document).ready(function() {
-    // function loader() {
-
-    //     var loader = document.querySelector("#loader");
-    //     loader.classList.add("fadeOut");
-    
-    //     setTimeout(function() {
-    //         var fullContent = document.querySelector("#fullContent");
-    //         fullContent.style.display = "initial";
-    //         loader.style.display = "none";
-    //     }, 1000);
-    // }
 
     setTimeout(function(){
-    $("#loadingContainer").fadeOut("slow");
-    }, 4850);
+        $("#loadingContainer").fadeOut("slow");
+        }, 4800);
 
+    setTimeout(function(){
+        $("#menuSection").fadeIn("slow");
+        }, 5200);
 
     $("#startButton").on("click", function(){
         window.location.href = "game.html";
     })
 
-
     $("#rulesButton").on("click", function(){
-        $("#rules").fadeToggle("slow");
+        $("#rulesSection").show();
+        $("h1").hide();
+        $("#menuSection").hide();
     })
-    
+
+    $("#closeButton").on("click", function(){
+        $("#rulesSection").hide();
+        $("h1").show();
+        $("#menuSection").show();
+    })
 
 })

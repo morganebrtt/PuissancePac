@@ -15,6 +15,8 @@ $(document).ready(function(){
 
             $("td").click((e) => this.handle_click(e));
 
+            $("#resetButton").click((e) => this.reset(e));
+
             }
         
     
@@ -32,26 +34,33 @@ $(document).ready(function(){
         // cette fonction va nous permettre de déterminer ce qui est déclenché au clic
         handle_click(e){
             //on récupère l'axe y
-            let x = parseFloat($(e.target).parent().attr('data-col'));
+            let x = parseFloat($(e.target).parent().get(0).tagName === 'TD'
+                                    ? $(e.target).parent().attr('data-col')
+                                    : $(e.target).attr('data-col')
+                                );
             //on recupère l'axe x
             let y = this.check_last_index(x);
 
             console.log(y,x);
 
-            this.grid[y][x] = this.turn;
+            if (y >= 0){
+                console.warn(y)
+                this.grid[y][x] = this.turn;
 
-            console.log(this.grid);
+                console.log(this.grid);
 
-            this.add_token(y, x);
+                this.add_token(y, x);
+                // on a mis ce this.turn pour obtenir le player qui vient de jouer (car le add_token l'a déjà modifié)
+                this.win(y, x, this.turn === 1 ? 2 : 1 );
 
+             } else {
+                alert("Cette colonne est remplie!")
+             }
             console.log("player", this.turn)
 
-            console.log(this.win(y, x, this.turn === 1 ? 2 : 1 ));
-            // on a mis ce this.turn pour obtenir le player qui vient de jouer (car le add_token l'a déjà modifié)          
-           
-            if (this.winner){
-                console.warn("le joueur " + this.winner + " a gagné");
-            }
+          
+               
+
         }
 
         // cette fonction va nous permettre d'aller chercher la dernière case vide dans la colonne cliquée
@@ -59,6 +68,7 @@ $(document).ready(function(){
             for (let h= this.grid_dimension.y - 1; h >= 0; h--){
                     if(this.grid[h][x] === 0){
                         return h;
+                        
                     }
                 }
         }
@@ -69,7 +79,6 @@ $(document).ready(function(){
             // cibler/placer les jetons sur img html (mettre condition pour changer le jeton en fonction du joueur)
             // compter les tours (this.count.turn++)
             // mettre à jour notre grille en mettant 1 ou 2 en fonction du joueur this.grid[y][x]
-
             
             // attention à bien mettre === dans la condition pour que ce ne soit pas considéré comme une asignation
             if (this.turn === this.player_one){
@@ -90,29 +99,35 @@ $(document).ready(function(){
             console.log("x", x)
             console.log("player", player)
 
-        // Horizontal
+        // Check horizontal
             let count = 0;
             for (let l = 0; l < this.grid_dimension.x; l++) {
                 count = (this.grid[y][l] == player) ? count+1 : 0;
                 console.log("count hori", count)
                 if (count >= 4) {
                     this.winner = player;
+                    setTimeout(()=> {
+                        alert("le joueur " + this.winner + " a gagné");
+                    }, 50)
                     return true;
                 }
             }
 
-        // Vertical
+        // Check vertical
             count = 0;
             for (let h = 0; h < this.grid_dimension.y; h++) {
                 count = (this.grid[h][x] == player) ? count+1 : 0;
                 console.log("count verti", count)
                 if (count >= 4) {
                     this.winner = player;
+                    setTimeout(()=> {
+                        alert("le joueur " + this.winner + " a gagné");
+                    }, 50)
                     return true;
                 }
             }
 
-        // Diagonal  
+        // Check diagonale
             count = 0;
             // let shift = row - column;
             let shift = y - x;
@@ -121,11 +136,14 @@ $(document).ready(function(){
                 console.log("count diago", count)
                 if (count >= 4) {
                     this.winner = player;
+                    setTimeout(()=> {
+                        alert("le joueur " + this.winner + " a gagné");
+                    }, 50)
                     return true;
                 }
             }
         
-        // Anti - diagonal
+        // Check anti - diagonal
             count = 0;
             // shift = row + column;
             let second_shift = y + x;
@@ -135,33 +153,29 @@ $(document).ready(function(){
                 console.log("count anti diago", count)
                 if (count >= 4){
                     this.winner = player;
+                    setTimeout(()=> {
+                        alert("le joueur " + this.winner + " a gagné");
+                    }, 50)
                     return true;
                 }
             }
 
-            
+            return false;
 
         }
-
-        
     
-        // reset() {
-        //     for (let l = 0; l < this.grid_dimension.x; l++) {
-        //       for (let h = 0; h < this.grid_dimension.y; h++) {
-        //         this.board[i][j] = 0;
-        //       }
-        //     }
-
-
-    
-
-        // }
+        reset(){
+            this.generate_grid(); 
+            this.turn = 1;
+            this.count_turn = 0; // nombre de coups joués
+            this.winner = null;
+            $("img").attr("src", "./img/target.png").attr("class", "none");
+        }
 
     }
+
     var game1 = new Puissance4()
-    console.log(game1);
-    
-    
+    console.log(game1); 
 
 });
 

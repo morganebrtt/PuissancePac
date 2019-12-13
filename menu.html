@@ -2,7 +2,9 @@
 <html>
 <head>
     <meta charset="UTF-8"/>
-    <title>Puissance 4</title>
+    <title>Puissance 4 - Menu</title>
+    <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="img/pacicon.png" >
     <link rel="stylesheet" href="css/style.css" />
     <!-- On inclut jquery via cdn -->
     <script
@@ -20,21 +22,37 @@
     <section id="loadingContainer">
         <img src="img/pacgif.gif">
     </section>
-    
-    
+
+    <h1>puissance pack</h1>
+
     <section id="menuSection">
-        <button type="button" id="startButton">Start Game</button>
-        <button type="button" id="rulesButton">Rules</button>
-        <article id="rules">
-            <p>Début de partie
-                Pour commencer une partie de puissance 4, on désigne le joueur qui commence.
-                
-                Déroulement de la partie
-                Il met un de ses jetons de couleur dans l’une des colonnes de son choix. Le jeton se retrouve en bas de la colonne. Le deuxième joueur insère à son tour son jeton, de l’autre couleur dans la colonne de son choix. Les joueurs répètent la manœuvre jusqu'à ce qu'un joueur aligne 4 pions.
-                
-                Fin de la partie
-                Le premier joueur à aligner 4 pions, que ce soit horizontalement, verticalement ou en diagonale, remporte la partie.</p>
-        </article>
+        <button type="button" class="button" id="startButton" >Jouer</button>
+        <button type="button" class="button" id="rulesButton">Règles</button>
+    </section>
+
+    <section id="rulesSection">
+        <button type="button" class="close" id="closeButton">
+            <img src="img/close.png" alt="icône croix fermeture">
+        </button>
+        <div class="rulesTitle">
+            <img src="img/pacicon.png" alt="icône pacman">
+            <h2>Début de partie</h2>
+        </div>
+        <p>Pour commencer une partie de puissance 4, on désigne le joueur qui commence.</p>
+        <div class="rulesTitle">
+            <img src="img/pacicon.png" alt="icône pacman">
+            <h2>Déroulement</h2>
+        </div>
+        <p>Il met un de ses jetons de couleur dans l’une des colonnes de son choix.
+            Le jeton se retrouve en bas de la colonne. Le deuxième joueur insère à son
+            tour son jeton, de l’autre couleur dans la colonne de son choix. Les joueurs
+            répètent la manœuvre jusqu'à ce qu'un joueur aligne 4 pions.</p>
+        <div class="rulesTitle">
+            <img src="img/pacicon.png" alt="icône pacman">
+            <h2>Fin de la partie</h2>
+        </div>
+        <p>Le premier joueur à aligner 4 pions, que ce soit horizontalement, verticalement
+            ou en diagonale, remporte la partie.</p>
     </section>
 </body>
 </html>
