@@ -45,6 +45,8 @@ $(document).ready(function(){
 
                 this.win(y, x, this.turn === 1 ? 2 : 1 );
 
+                this.current_player();
+
              } else {
                 alert("Cette colonne est remplie!")
              }            
@@ -132,13 +134,23 @@ $(document).ready(function(){
             }
             return false;
         }
+
+        current_player(){
+            if(this.turn === this.player_one){
+                $("#currentPlayer img").attr("src", "./img/pacicon.png");
+                } else {
+                    $("#currentPlayer img").attr("src", "./img/ghosticon.png");
+                    }
+            $("#currentPlayer p").html("joueur " + this.turn); 
+        }
     
         reset(){
             this.generate_grid(); 
-            this.turn = 1;
+            this.turn = this.player_one;
             this.count_turn = 0;
             this.winner = null;
-            $("img").attr("src", "./img/target.png").attr("class", "none");
+            $("#gameSection img").attr("src", "./img/target.png").attr("class", "none");
+            this.current_player();
         }
 
     }
