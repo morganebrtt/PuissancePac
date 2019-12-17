@@ -57,8 +57,7 @@ $(document).ready(function(){
         check_last_index(x){
             for (let h= this.grid_dimension.y - 1; h >= 0; h--){
                     if(this.grid[h][x] === 0){
-                        return h;
-                        
+                        return h;                       
                     }
                 }
         }
